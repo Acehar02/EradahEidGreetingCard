@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تهنئة العيد - إرادة</title>
+<style>
+  @font-face {
+    font-family: 'DINNextLTArabic';
+    src: url('fonts/DINNextLTArabic-Light.ttf') format('truetype');
+  }
+  body {
+    margin: 0; padding: 20px;
+    font-family: 'DINNextLTArabic', sans-serif;
+    background-color: white;
+    direction: rtl;
+    text-align: center;
+  }
+  .card-wrapper {
+    width: 320px; /* عرض العرض */
+    margin: 20px auto;
+    overflow: hidden;
+  }
+  .card {
+    position: relative;
+    width: 640px;  /* الحجم الحقيقي */
+    height: 800px;
+    margin: 0 auto;
+    background-image: url('images/card_1.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transform: scale(0.5); /* تصغير للعرض */
+    transform-origin: top center;
+  }
+  .name-on-line {
+    position: absolute;
+    top: 580px;  /* تم تعديل مكان الاسم ليناسب الحجم الكبير */
+    width: 100%;
+    text-align: center;
+    font-size: 52px;  /* حجم خط أكبر متناسب */
+    font-weight: normal;
+    color: white;
+  }
+  .btn {
+    background-color: #168993;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 10px;
+  }
+  .btn:hover {
+    background-color: #125a5e;
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+<div class="card-wrapper">
+  <div class="card" id="card">
+    <div class="name-on-line" id="nameOnCard"></div>
+  </div>
+</div>
+
+<button class="btn" onclick="downloadCard()">تحميل البطاقة</button>
+<button class="btn" onclick="goBack()">رجوع</button>
+
+<script>
+  function getParameterByName(name) {
+    const url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\$&');
+    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+    const results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+
+  const nameOnCard = document.getElementById('nameOnCard');
+  const name = getParameterByName('name');
+  nameOnCard.textContent = name || '';
+
+  function downloadCard() {
+    const card = document.getElementById('card');
+    html2canvas(card, { scale: 3 }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'تهنئة_العيد.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  }
+
+  function goBack() {
+    window.location.href = 'index.html';
+  }
+</script>
+
+</body>
+</html>

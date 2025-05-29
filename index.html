@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>اختيار بطاقة التهنئة - إرادة</title>
+<style>
+  @font-face {
+    font-family: 'DINNextLTArabic';
+    src: url('fonts/DINNextLTArabic-Medium.ttf') format('truetype');
+  }
+  body {
+    margin: 0; padding: 20px;
+    font-family: 'DINNextLTArabic', sans-serif;
+    background-color: white;
+    direction: rtl;
+    text-align: center;
+  }
+  .logo {
+    width: 180px;
+    margin-bottom: 15px;
+  }
+  h1 {
+    color: #168993;
+  }
+  .box {
+    border: 2px solid #168993;
+    border-radius: 12px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  input[type=text] {
+    width: 90%;
+    font-size: 18px;
+    padding: 10px;
+    border: 2px solid #168993;
+    border-radius: 6px;
+    margin: 15px 0;
+  }
+  label {
+    font-size: 18px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  button {
+    background-color: #168993;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #125a5e;
+  }
+</style>
+</head>
+<body>
+
+<img src="images/logo.jpeg" alt="لوغو إرادة" class="logo" />
+
+<div class="box">
+  <h1>عيدك مبارك</h1>
+  <input type="text" id="nameInput" placeholder="اكتب اسمك هنا..." />
+  <div>
+    <label><input type="radio" name="card" value="card1" checked> بطاقة 1</label>
+    <label><input type="radio" name="card" value="card2"> بطاقة 2</label>
+  </div>
+  <button onclick="showGreeting()">عرض التهنئة</button>
+</div>
+
+<script>
+function showGreeting() {
+  const name = document.getElementById('nameInput').value.trim();
+  if (!name) {
+    alert('يرجى كتابة الاسم');
+    return;
+  }
+  const card = document.querySelector('input[name="card"]:checked').value;
+  const encodedName = encodeURIComponent(name);
+  if (card === 'card1') {
+    window.location.href = `card1.html?name=${encodedName}`;
+  } else {
+    window.location.href = `card2.html?name=${encodedName}`;
+  }
+}
+</script>
+
+</body>
+</html>
